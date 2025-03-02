@@ -13,7 +13,7 @@ COPY --chown=rasa:rasa . .
 # Setting the port environment variable - currently commenting this out because I'm not sure how useful it will be
 ENV PORT=5005
 
-# Train the model (optional if you’ve already trained, but ensures the latest data)
+# Train the model 
 RUN rasa train
 
 # Expose the port Rasa will run on
@@ -24,4 +24,4 @@ ENTRYPOINT []
 
 # ENTRYPOINT [ "rasa" ]
 # Run Rasa with API enabled and CORS open (adjust CORS value if needed)
-CMD bash -c "rasa run --enable-api --cors '*' --debug"
+CMD ["/bin/bash", "-c", "rasa run --enable-api --cors '*' --port ${PORT:-5005} --debug"]
