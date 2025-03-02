@@ -11,17 +11,17 @@ COPY --chown=rasa:rasa . .
 # RUN chown -R rasa:rasa /app
 
 # Setting the port environment variable - currently commenting this out because I'm not sure how useful it will be
-ENV PORT=5005
+ENV PORT=10000
 
 # Train the model 
 RUN rasa train
 
 # Expose the port Rasa will run on
-EXPOSE 5005
+EXPOSE 10000
 
 # Resetting the entrypoint bcs the image automatically comes with a rasa entrypoint and it makes some things difficult
 ENTRYPOINT []
 
 # ENTRYPOINT [ "rasa" ]
 # Run Rasa with API enabled and CORS open (adjust CORS value if needed)
-CMD ["/bin/bash", "-c", "rasa run --enable-api --cors '*' --port ${PORT:-5005} --debug"]
+CMD ["/bin/bash", "-c", "rasa run --enable-api --cors '*' --port ${PORT:-10000} --debug"]
