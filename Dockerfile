@@ -17,11 +17,11 @@ ENV PORT=5005
 RUN rasa train
 
 # Expose the port Rasa will run on
-EXPOSE $PORT
+EXPOSE 5005
 
 # Resetting the entrypoint bcs the image automatically comes with a rasa entrypoint and it makes some things difficult
 ENTRYPOINT []
 
 # ENTRYPOINT [ "rasa" ]
 # Run Rasa with API enabled and CORS open (adjust CORS value if needed)
-CMD bash -c "rasa run --enable-api --cors '*' --port ${PORT:-5005} --debug"
+CMD bash -c "rasa run --enable-api --cors '*' --debug"
