@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rasa Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+        </div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+<!-- Version that works with the Widget that I dunno how to operate: <html>
+    <body>
+        <script>
+            !(function () {
+              let e = document.createElement("script"),
+                t = document.head || document.getElementsByTagName("head")[0];
+              (e.src = "./dist/index.js"),
+                (e.async = !0),
+                (e.onload = () => {
+                  window.ChatbotWidget.default({
+                    rasaServerUrl: "http://localhost:5005/webhooks/rest/webhook",
+                    userId: "jitesh97",
+                    initialPayload: "/greet",
+                    metadata: {},
+                    botAvatar:
+                      "",
+                    widgetColor: "#a78bfa",
+                    textColor: "#4c1d95",
+                    userMsgBackgroundColor: "#e1d7ff",
+                    botTitle: "Retail Bot",
+                    botSubTitle: "Sales & Services Assistant",
+                    botMsgBackgroundColor: "#f3f4f6",
+                    botResponseDelay: "",
+                    chatHeaderCss: {
+                      textColor: "#4c1d95",
+                      backgroundColor: "#a78bfa",
+                      enableBotAvatarBorder: true,
+                    },
+                    chatHeaderTextColor: "#4c1d95",
+                    botMsgColor: "#4b5563",
+                    userMsgColor: "#4c1d95",
+                    embedded: false,
+                    buttonsCss: {
+                      color: "#4c1d95",
+                      backgroundColor: "#e1d7ff",
+                      borderColor: "#4b5563",
+                      borderWidth: "0px",
+                      borderRadius: "999px",
+                      hoverBackgroundColor: "white",
+                      hoverColor: "#4b5563",
+                      hoverborderWidth: "1px",
+                      enableHover: false,
+                    },
+                  });
+                }),
+                t.insertBefore(e, t.firstChild);
+            })();
+          </script>
+    </body>
+</html> -->
+
