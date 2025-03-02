@@ -5,10 +5,10 @@ FROM rasa/rasa:latest-full
 WORKDIR /app
 
 # Copy all project files into the container
-COPY . .
+COPY --chown=rasa:rasa . .
 
 # Change ownership of all files in /app to the 'rasa' user
-RUN chown -R rasa:rasa /app
+# RUN chown -R rasa:rasa /app
 
 # Train the model (optional if you’ve already trained, but ensures the latest data)
 RUN rasa train
