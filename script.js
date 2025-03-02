@@ -1,3 +1,5 @@
+let rasaServerUrl = "https://sample-bot-lop4.onrender.com/webhooks/rest/webhook";
+
 document.addEventListener("DOMContentLoaded", function () {
     sendInitialMessage();
 });
@@ -12,7 +14,7 @@ async function sendInitialMessage() {
     let chatBox = document.getElementById("chat-box");
 
     try {
-        let response = await fetch("http://localhost:5005/webhooks/rest/webhook", {
+        let response = await fetch(rasaServerUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ sender: "user", message: "/greet" }),
@@ -52,7 +54,7 @@ async function sendMessage() {
 
     // Send message to Rasa
     try {
-        let response = await fetch("http://localhost:5005/webhooks/rest/webhook", {
+        let response = await fetch(rasaServerUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ sender: "user", message: userInput }),
