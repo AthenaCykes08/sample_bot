@@ -1,4 +1,4 @@
-let rasaServerUrl = "https://sample-bot-lop4.onrender.com/webhooks/rest/webhook";
+let rasaServerUrl = "https://bar-img-820874387134.europe-west2.run.app/webhooks/rest/webhook";
 
 document.addEventListener("DOMContentLoaded", function () {
     sendInitialMessage();
