@@ -45,10 +45,23 @@ async function rasaInteraction(msg) {
 
         // Display bot response
         data.forEach((msg) => {
+            let botMessageContainer = document.createElement("div");
+            botMessageContainer.classList.add('message', 'bot-message-container');
+
+            let botImage = document.createElement('img');
+            botImage.className = 'avatar';
+            botImage.src = "https://cdn-icons-png.flaticon.com/512/8649/8649607.png";
+            botImage.alt = "Bot Avatar";
+
             let botMessage = document.createElement("div");
             botMessage.className = "bot-message";
             botMessage.innerText = msg.text;
-            chatBox.appendChild(botMessage);
+            
+            botMessageContainer.appendChild(botImage);
+            botMessageContainer.appendChild(botMessage);
+            
+            chatBox.appendChild(botMessageContainer);
+
             lastMsg = msg.text;
         });
 
@@ -70,7 +83,7 @@ function makeButtons(lastMsg) {
     let buttonVals = [];
     switch (lastMsg) {
         case responses.utter_greet:
-            buttonVals = ["great", "bad"];
+            buttonVals = ["Great", "Bad"];
             break;
         case responses.utter_goodbye:
             buttonVals = [];
@@ -79,7 +92,7 @@ function makeButtons(lastMsg) {
             buttonVals = [];
             break;
         case responses.utter_did_that_help:
-            buttonVals = ["yes", "no"];
+            buttonVals = ["Yes", "No"];
             break;
         case responses.utter_happy:
             buttonVals = [];
@@ -97,6 +110,7 @@ function makeButtons(lastMsg) {
         let responseButton = document.createElement("button");
         responseButton.innerText = buttonValue;
         responseButton.value = buttonValue;
+        responseButton.className = "input_button";
         responseButton.onclick = () => autofillResponse(responseButton.value);
         buttonPlace.appendChild(responseButton);
     })
@@ -115,10 +129,25 @@ function makeUserMessage(msg) {
     let chatBox = document.getElementById("chat-box");
 
     // Display user message
+    let userMessageContainer = document.createElement("div");
+    userMessageContainer.classList.add('message', 'user-message-container');
+    
+    let userImage = document.createElement('img');
+    userImage.className = 'avatar';
+    userImage.src = "https://cdn-icons-png.flaticon.com/512/8649/8649607.png";
+    userImage.alt = "User Avatar";
+
     let userMessage = document.createElement("div");
     userMessage.className = "user-message";
     userMessage.innerText = msg;
-    chatBox.appendChild(userMessage);
+
+    userMessageContainer.appendChild(userImage);
+    userMessageContainer.appendChild(userMessage);
+
+    chatBox.appendChild(userMessageContainer);
+
+    // Scroll to bottom
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 // Send the initial message - use the greet intent (see domain.yml)

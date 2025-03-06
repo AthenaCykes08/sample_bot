@@ -7,7 +7,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="chat-container">
+    <div class="left-element">
+      <div class="big-image">
+        <h1>POST OFFICE: HIGH RISK SCENARIO</h1>
+        <p>On this page, you will find a chatbot for customer service in a post office scenario. In this scenario, you are interested in posting your passport through the Post Office and are using the chatbot to find out more information about potential options. The chatbot is fictitious and doesn’t have any connections to any actual Post Office services.</p>
+        <p><b>Complete the following tasks using the chatbot:</b></p>
+        <ul>
+          <li><b>Task 1: </b>ask the chatbot about a price guide for letters</li>
+          <li><b>Task 2: </b>ask the chatbot about insurance options for letters</li>
+          <li><b>Task 3: </b>ask the chatbot to purchase a postage option and insurance most appropriate for sending a passport. </li>
+        </ul>
+        <p>When asked for postage details, provide the following:</p>
+        <div class="address-1"> <b>Receiver's Address:</b> <br>
+          Alice Brown <br>
+          20 York Road <br>
+          DARTFORD <br>
+          DA89 7LI</div>
+        <div class="address-2"> <b>Sender's Address: </b> <br>
+          Bob Smith <br>
+          1 Main Road <br>
+          OXFORD <br>
+          OX76 9RB</div>
+        <p><b>When you have completed all of the above tasks, the chatbot will provide you a link to a questionnaire to record your feedback</b></p>
+        <p>You may also at any time send the message “STOP” (in all capitals) to the chatbot to end the dialogue and move on to the questionnaire.</p>
+      </div>
+      
+    </div>
+    <div class="right-element">
+      <div class="chat-container">
+        <div class="chat-header">
+          <img class="chat-header-avatar" src="https://cdn-icons-png.flaticon.com/512/8649/8649607.png" alt="Alisa" />
+          <div class="chat-header-title">Virtual Assistant</div>
+          <button class="chat-header-close">&times;</button>
+        </div>
         <div class="chat-box" id="chat-box">
         </div>
         <!-- Temporary class just to have buttons in it for testing -->
@@ -17,8 +49,10 @@
             <input type="text" id="user-input" placeholder="Type a message...">
             <button onclick="sendMessage()">Send</button>
         </div>
+      </div>
     </div>
-    <script src="script.js"></script>
+
+  <script src="script.js"></script>
 </body>
 </html>
 
