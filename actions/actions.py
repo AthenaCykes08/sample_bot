@@ -25,3 +25,19 @@
 #         dispatcher.utter_message(text="Hello World!")
 #
 #         return []
+
+# The following is from the tutorial, tho modified slightly bcs I dunno if the API works correctly
+import requests
+import json
+from rasa_sdk import Action
+
+class ActionJoke(Action):
+  def name(self):
+    return "action_joke"
+
+  def run(self, dispatcher, tracker, domain):
+    # Dunno if this API is up to date, will instead just utter a message akin to hello world
+    # request = requests.get('http://api.icndb.com/jokes/random').json()  # make an api call
+    # joke = request['value']['joke']  # extract a joke from returned json response
+    dispatcher.utter_message(text="Hello World")  # send the message back to the user
+    return []
