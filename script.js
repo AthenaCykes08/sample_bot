@@ -1,4 +1,4 @@
-let rasaServerUrl = "https://bar-img-820874387134.europe-west2.run.app/webhooks/rest/webhook";
+let rasaServerUrl = "http://localhost:5005/webhooks/rest/webhook";
 
 // Potential chatbot responses, literally hardcoded in -> when working with real chatbot, will need to change this
 let responses = {
@@ -11,6 +11,39 @@ let responses = {
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
+
+    // Gonna first restart interaction I think, fairly important for form things and stuff
+    // gonna do either action_restart or action_session_start
+    try {
+        // Ok so I just discovered that session_start doesn't reset slots, just convo history
+        // So I think it is important to do restart as well
+
+        let response = await fetch(rasaServerUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            // So these message with "/" actually follow intents instead of responses (see domain.yml)
+            // And default actions
+            body: JSON.stringify({ sender: "user", message: "/restart" }),
+        });
+
+        let data = await response.json();
+
+        response = await fetch(rasaServerUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            // So these message with "/" actually follow intents instead of responses (see domain.yml)
+            body: JSON.stringify({ sender: "user", message: "/session_start" }),
+        });
+
+        // Not gonna do anything with this, just wanting to double make sure everything works correctly
+        data = await response.json();
+        
+
+    } catch (error) {
+        console.error("Error connecting to Rasa:", error);
+    }
+
+    // Then send the initial message
     sendInitialMessage();
 });
 

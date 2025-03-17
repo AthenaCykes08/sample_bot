@@ -11,3 +11,44 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+# Add the rule for initial message too I think
+# Currently, it in on conversation_start but don't know yet if I won't just make it a rule all the time
+- rule: Say `hello` when the user starts a conversation with intent `greet`
+  conversation_start: true
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+# At the moment, I dunno if I will keep this in rules but currently having this here just for testing
+- rule: activate postage form
+  steps:
+    - intent: ask_postage_options
+    - action: postage_form
+    - active_loop: postage_form
+
+- rule: submit postage form
+  condition:
+  - active_loop: postage_form
+  steps:
+    - action: postage_form
+    - active_loop: null
+    - action: action_calculate_postage
+    - action: utter_purchase_interest
+
+- rule: activate address form
+  condition:
+  - active_loop: null
+  steps:
+    - action: utter_purchase_interest
+    - intent: affirm
+    - action: address_form
+    - active_loop: address_form
+
+- rule: submit address form
+  condition:
+  - active_loop: address_form
+  steps:
+    - action: address_form
+    - active_loop: null
+    - action: utter_address_summary

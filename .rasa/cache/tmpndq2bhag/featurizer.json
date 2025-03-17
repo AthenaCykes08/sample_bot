@@ -1,0 +1,67 @@
+{
+  "type": "MaxHistoryTrackerFeaturizer",
+  "state_featurizer": {
+    "action_texts": [],
+    "entity_tag_specs": [],
+    "feature_states": {
+      "intent": {
+        "affirm": 0,
+        "ask_insurance": 1,
+        "ask_post_stats": 2,
+        "ask_postage_options": 3,
+        "back": 4,
+        "bot_challenge": 5,
+        "deny": 6,
+        "goodbye": 7,
+        "greet": 8,
+        "nlu_fallback": 9,
+        "out_of_scope": 10,
+        "restart": 11,
+        "session_start": 12
+      },
+      "action_name": {
+        "action_listen": 0,
+        "action_restart": 1,
+        "action_session_start": 2,
+        "action_default_fallback": 3,
+        "action_deactivate_loop": 4,
+        "action_revert_fallback_events": 5,
+        "action_default_ask_affirmation": 6,
+        "action_default_ask_rephrase": 7,
+        "action_two_stage_fallback": 8,
+        "action_unlikely_intent": 9,
+        "action_back": 10,
+        "...": 11,
+        "action_extract_slots": 12,
+        "validate_postage_form": 13,
+        "action_calculate_postage": 14,
+        "utter_address_summary": 15,
+        "utter_anything_else": 16,
+        "utter_ask_address_form_reciever_address": 17,
+        "utter_ask_address_form_sender_address": 18,
+        "utter_ask_further": 19,
+        "utter_ask_postage_form_insured": 20,
+        "utter_ask_postage_form_tracked": 21,
+        "utter_confirm_further_help": 22,
+        "utter_end_of_simulation": 23,
+        "utter_goodbye": 24,
+        "utter_greet": 25,
+        "utter_iamabot": 26,
+        "utter_insurance": 27,
+        "utter_post_stats": 28,
+        "utter_purchase_interest": 29,
+        "utter_signed": 30,
+        "postage_form": 31,
+        "address_form": 32
+      },
+      "entities": {},
+      "slots": {},
+      "active_loop": {
+        "postage_form": 0,
+        "address_form": 1
+      }
+    }
+  },
+  "remove_duplicates": true,
+  "max_history": 5
+}
