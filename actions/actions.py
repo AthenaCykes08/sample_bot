@@ -48,6 +48,10 @@ class ValidatePostageForm(FormValidationAction):
             dispatcher.utter_message(response="utter_signed")
             return {"tracked": False, "signed": True}
 
+### Ngl, I could potentially have the same action server for two bots, and just write two alternate functions -> and one chatbot calls 
+### ActionCalculatePostageHigh (for high anthro) and the other have ...Low (for low anthro)
+### Can't have the same action server for all 4 because of the ValidatePostageForm class -> and even if I could work around it, I think I will have separate 
+### servers just for correctness and debugging ease
 class ActionCalculatePostage(Action):
     def name(self) -> Text:
         return "action_calculate_postage"
@@ -66,6 +70,23 @@ class ActionCalculatePostage(Action):
         dispatcher.utter_message(cost_message)
         return []
 
+class ActionCalculatePostageLow(Action):
+    def name(self) -> Text:
+        return "action_calculate_postage_low"
+    
+    def run(self, dispatcher: CollectingDispatcher, tracker, domain):
+        insured = tracker.get_slot("insured")
+        tracked = tracker.get_slot("tracked")
+
+        post_cost = 3.20 if tracked else 2.80
+
+        if insured:
+            post_cost += 6.49
+        
+        cost_message = f"Summary of the chosen postage option: {'Tracked' if tracked else 'Signed'} {'with' if insured else 'without'} Insurance. \n\n Total cost: £{post_cost:.2f}"
+
+        dispatcher.utter_message(cost_message)
+        return []
 
 # The following is from the tutorial, tho modified slightly bcs I dunno if the API works correctly
 # import requests

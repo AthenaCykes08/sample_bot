@@ -13,6 +13,9 @@
 action_endpoint:
  url: "https://action-server-test-820874387134.europe-west2.run.app/webhook"
 
+ ### THIS IS JUST FOR TESTING PURPOSES, REMEMBER TO REMOVE THIS LATER
+#  url: "http://localhost:5055/webhook"
+
 # Tracker store which is used to store the conversations.
 # By default the conversations are stored in memory.
 # https://rasa.com/docs/rasa/tracker-stores

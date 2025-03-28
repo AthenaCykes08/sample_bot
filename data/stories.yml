@@ -2,6 +2,7 @@ version: "3.1"
 
 stories:
 
+## Stories for task 1 and 2 - happy paths where either task 1 or task 2 are being done first
   - story: happy path task 1 first
     steps:
       - intent: ask_post_stats
@@ -20,9 +21,8 @@ stories:
       - action: utter_post_stats
       - action: utter_anything_else 
   
-  # Note to self: add a path where someone instead says 'yes' to utter anything else, where we follow up with 'what else can I help with'
-  # As well as a 'no' where you go 'if you do think of anything else, let me know and I will try to help'
-
+## Stories for Task 1 and 2 - happy paths in case someone answers simply "yes", and sad paths in case someone answers "no", to "what can I help with", 
+## prompting further conversation
   - story: happy path longer task 1 first
     steps:
       - intent: ask_post_stats
@@ -44,7 +44,7 @@ stories:
       - intent: ask_post_stats
       - action: utter_post_stats
       - action: utter_anything_else 
-  
+
   - story: sad path help rejection task 1 first
     steps:
       - intent: ask_post_stats
@@ -61,22 +61,12 @@ stories:
       - intent: deny
       - action: utter_confirm_further_help
   
-  - story: task 3 with rejection of purchase
-    steps:
-      - intent: ask_postage_options
-      - action: postage_form
-      - active_loop: postage_form
-      - active_loop: null 
-      - action: action_calculate_postage
-      - action: utter_purchase_interest
-      - intent: deny
-      - action: utter_confirm_further_help
-      - action: utter_end_of_simulation
-  
-  ## Keep these as full stories, having them be actions didn't exactly work out
+  ## Task 3 paths - full stories, with either rejection or acceptance of correctly entered address. 
+  ## Path of reject at "utter_purchase_interest" has been commented out and fully converted into a rule-based interaction (tbh so has this but I kept this here bcs yes) 
   - story: task 3 with acceptance of address
     steps:
       - intent: ask_postage_options
+      - action: utter_passport_letter
       - action: postage_form
       - active_loop: postage_form
       - active_loop: null 
@@ -89,11 +79,11 @@ stories:
       - action: utter_address_summary
       - intent: affirm
       - action: utter_payment
-      - action: utter_end_of_simulation
 
   - story: task 3 with denial of address
     steps:
       - intent: ask_postage_options
+      - action: utter_passport_letter
       - action: postage_form
       - active_loop: postage_form
       - active_loop: null 
@@ -107,31 +97,20 @@ stories:
       - intent: deny
       - action: utter_repeat
       - action: utter_brievity
-      - action: utter_end_of_simulation
 
-# - story: happy path
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: mood_great
-#   - action: utter_happy
+# Rejected stories
 
-# - story: sad path 1
+# Ok this created an interesting thing -> if I did a repeat, i.e. one of my inputs wasn't recognised, then the deny at the end would 
+# lead to confirm further help but not utter end of simulation. Two paths: either make a rule with "utter_purchase_interest" "deny" OR 
+# Combine confirm_further_help and end_of_simulation so they are a single reply
+# - story: task 3 with rejection of purchase
 #   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: mood_unhappy
-#   - action: action_joke
-#   - action: utter_did_that_help
-#   - intent: affirm
-#   - action: utter_happy
-
-# - story: sad path 2
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: mood_unhappy
-#   - action: action_joke
-#   - action: utter_did_that_help
-#   - intent: deny
-#   - action: utter_goodbye
+#     - intent: ask_postage_options
+#     - action: utter_passport_letter
+#     - action: postage_form
+#     - active_loop: postage_form
+#     - active_loop: null 
+#     - action: action_calculate_postage
+#     - action: utter_purchase_interest
+#     - intent: deny
+#     - action: utter_quick_end_of_simulation

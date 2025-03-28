@@ -17,10 +17,49 @@ nlu:
     - goodevening
     - good afternoon
 
+- intent: break
+  examples: |
+    - break
+    - BREAK
+    - bteak
+    - breal
+    - brwak
+    - bresk
+    - nreak
+    - vreak
+
+- intent: stop
+  examples: |
+    - stop
+    - STOP
+    - swop
+    - sto[
+    - stpp
+    - stoo
+    - atop
+    - syop
+    - srop
+
 - intent: affirm
   examples: |
     - yes
     - y
+    - ye
+    - uh yes
+    - let's do it
+    - yeah
+    - uh yes
+    - um yes
+    - yes knocking
+    - that's correct
+    - yes yes
+    - right
+    - yea
+    - yes
+    - yes right
+    - yes and i dont care
+    - right on
+    - i love that
     - indeed
     - of course
     - that sounds good
@@ -38,6 +77,14 @@ nlu:
     - don't like that
     - no way
     - not really
+    - no thanks
+    - no thank you
+    - uh no
+    - breath no
+    - do you have something else
+    - no this does not work for me
+    - nope
+    - nu uh
 
 - intent: goodbye
   examples: |
@@ -95,12 +142,26 @@ nlu:
     - What compensation does the postal service offer for missing letters or parcels
     - Could you please inform me of the actions that will be taken by the post office if my parcel goes missing
 
-# TODO: add more examples later
 - intent: ask_postage_options
   examples: |
     - Could you walk me through potential postage options suitable for sending a passport?
     - List some postage options that would be suitable for sending a passport
-    - Can you give me some advice on postage options approrpriate for sending a passport?
+    - Can you give me some advice on mailing options approrpriate for sending a passport?
+    - What postage options are there for me mailing a passport?
+    - I wish to send some identification documents, can you advise me on how to do that?
+    - Do you have any recommendations for shipping for sending a passport
+    - Give me your recommendations of postage for a passport
+    - If you had to send a passport, what postage option would you use?
+    - What kind of letter pricing is there for sending a passport?
+    - What are the available mailing options for sending a passport securely
+    - What are some recommended postage methods for mailing a passport?
+    - I need to send my passport — what shipping would you recommend
+    - Could you list some secure ways to post a passport?
+    - I’m looking to mail a passport — what are my postage options?
+    - Can you give me a step by step walkthrough of shipping options available for sending a passport
+    - Please help me pick the approrpriate postage for sending a passport
+    - I don't know what shipping to buy for sending a passport. Could you give me some advice?
+    - What mail options does the Post Office offer for mailing passports?
 
 # - intent: mood_great
 #   examples: |

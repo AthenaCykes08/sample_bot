@@ -1,23 +1,26 @@
+// TODO: remember to change this later
 let rasaServerUrl = "http://localhost:5005/webhooks/rest/webhook";
 
 // Potential chatbot responses, literally hardcoded in -> when working with real chatbot, will need to change this
 let responses = {
-    utter_greet: "Hey! How are you?",
-    utter_cheer_up: "Here is something to cheer you up:",
-    utter_did_that_help: "Did that help you?",
-    utter_happy: "Great, carry on!",
-    utter_goodbye: "Bye",
-    utter_iamabot:"I am a bot, powered by Rasa."
+    utter_greet: "Hello, I'm Alex, and I work for the Post Office. How can I assist you today?",
+    utter_anything_else: "Can I help with anything else?",
+    utter_ask_further: "That's great! What else can I help with?",
+    utter_confirm_further_help: "That's alright. If any other questions come to mind, feel free to ask them here and I will do my best to answer.",
+    utter_repeat: "(SIMULATION MESSAGE: IF YOU HAVE SEEN THIS MESSAGE MULTIPLE TIMES, PLEASE USE THE 'SUGGESTED ANSWERS' BUTTONS)",
+
+    utter_is_suitable: "Is this option suitable?",
+    utter_is_suitable_verbose: "Is this something that sounds suitable for you?",
+    utter_like_to_continue: " Would you like to continue?",
+    utter_like_to_purchase: " Is this correct?",
+    utter_repeat_form: "(SIMULATION MESSAGE: IF YOU HAVE SEEN THIS MESSAGE MULTIPLE TIMES, PLEASE USE THE BUTTONS BELOW)"
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
 
     // Gonna first restart interaction I think, fairly important for form things and stuff
-    // gonna do either action_restart or action_session_start
+    // gonna do both action_restart and action_session_start, as action_session_start doesn't reset slots
     try {
-        // Ok so I just discovered that session_start doesn't reset slots, just convo history
-        // So I think it is important to do restart as well
-
         let response = await fetch(rasaServerUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -77,26 +80,56 @@ async function rasaInteraction(msg) {
         let lastMsg = "";
 
         // Display bot response
-        data.forEach((msg) => {
-            let botMessageContainer = document.createElement("div");
-            botMessageContainer.classList.add('message', 'bot-message-container');
+        for (let msg of data) {
 
+            // Create the thinking message that will act as a delay when running the program
+            let thinkingContainer = document.createElement("div");
+            thinkingContainer.classList.add('message', 'bot-message-container');
+
+            // Create the image
             let botImage = document.createElement('img');
             botImage.className = 'avatar';
-            botImage.src = "https://cdn-icons-png.flaticon.com/512/8649/8649607.png";
-            botImage.alt = "Bot Avatar";
+            botImage.src = "https://www.dropbox.com/scl/fi/vs33yan6wwkki9yvfzcxp/Alex.png?rlkey=v5572fcmcnpbx4gvqhigsw2nt&st=gbab0s1b&raw=1";
+            botImage.alt = "Alex Avatar";
+            
+            // Create the text of the message
+            let thinkingMessage = document.createElement("div");
+            thinkingMessage.classList.add ("bot-message", "thinking");
+            thinkingMessage.innerHTML = "<i>Alex is typing...</i>";
+
+            // Add everything to the container
+            thinkingContainer.appendChild(botImage);
+            thinkingContainer.appendChild(thinkingMessage);
+            chatBox.appendChild(thinkingContainer);
+
+            // Scroll to bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Wait for 2 seconds before replacing the "thinking" message
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Remove the "thinking" message
+            chatBox.removeChild(thinkingContainer);
+
+            // Create the actual message 
+            let botMessageContainer = document.createElement("div");
+            botMessageContainer.classList.add('message', 'bot-message-container');
 
             let botMessage = document.createElement("div");
             botMessage.className = "bot-message";
             botMessage.innerText = msg.text;
             
-            botMessageContainer.appendChild(botImage);
+            if (msg.text.trim().replace(".", ",") == "(THIS MARKS THE END OF THE SIMULATION, PLEASE CLICK ON THE FOLLOWING LINK TO BE TAKEN TO THE QUESTIONNAIRE)") {
+                botMessage.innerHTML = "(THIS MARKS THE END OF THE SIMULATION, PLEASE CLICK ON THE <a href='https://forms.gle/7EDfpcHVYRS4FVX19'> FOLLOWING LINK </a> TO BE TAKEN TO THE QUESTIONNAIRE)"
+            }
+            
+            botMessageContainer.appendChild(botImage.cloneNode());
             botMessageContainer.appendChild(botMessage);
             
             chatBox.appendChild(botMessageContainer);
 
             lastMsg = msg.text;
-        });
+        };
 
         // Scroll to bottom
         chatBox.scrollTop = chatBox.scrollHeight;
@@ -111,42 +144,47 @@ async function rasaInteraction(msg) {
 
 // Extract the button making code into its own separate function (need to pass in the lassMsg as a local var)
 function makeButtons(lastMsg) {
+
+    console.log(lastMsg)
+
+    console.log(responses.utter_greet === lastMsg)
     
     // Depending on the chatbot response, we replace the currently empty buttonVals with a set of responses appropriate for the response
-    let buttonVals = [];
+    let buttonVals = {};
     switch (lastMsg) {
-        case responses.utter_greet:
-            buttonVals = ["Great", "Bad"];
+        case responses.utter_greet: 
+        case responses.utter_anything_else:
+        case responses.utter_ask_further: 
+        case responses.utter_confirm_further_help:
+        case responses.utter_repeat:
+            buttonVals = {"Statistics": "Hi, how often does the Post Office lose letters and parcels during delivery?", 
+                "Insurance": "What kind of remedial action is taken by the Post Office if the letter is lost?", 
+                "Postage Request": "Could you walk me through potential postage options suitable for sending a passport?"};
+                console.log(buttonVals);
             break;
-        case responses.utter_goodbye:
-            buttonVals = [];
-            break;
-        case responses.utter_cheer_up:
-            buttonVals = [];
-            break;
-        case responses.utter_did_that_help:
-            buttonVals = ["Yes", "No"];
-            break;
-        case responses.utter_happy:
-            buttonVals = [];
-            break;
-        case responses.utter_iamabot:
-            buttonVals = [];
+        case responses.utter_is_suitable:
+        case responses.utter_is_suitable_verbose:
+        case responses.utter_like_to_continue: 
+        case responses.utter_like_to_purchase:
+        case responses.utter_repeat_form:
+            buttonVals = {"Yes": "Yes", "No": "No"};
             break;
     }
+
+    console.log(buttonVals);
 
     // Then we make the buttons, where we give button a value corresponding with the text (https://www.w3schools.com/JSREF/prop_pushbutton_value.asp) 
     // and an onclick function that sends the message displayed in the button as a response
     let buttonPlace = document.getElementById("button_space");
 
-    buttonVals.forEach((buttonValue) =>{
+    for (let val in buttonVals) {
         let responseButton = document.createElement("button");
-        responseButton.innerText = buttonValue;
-        responseButton.value = buttonValue;
+        responseButton.innerText = val;
+        responseButton.value = buttonVals[val];
         responseButton.className = "input_button";
         responseButton.onclick = () => autofillResponse(responseButton.value);
         buttonPlace.appendChild(responseButton);
-    })
+    }
 }
 
 // The onClick button function
@@ -167,7 +205,7 @@ function makeUserMessage(msg) {
     
     let userImage = document.createElement('img');
     userImage.className = 'avatar';
-    userImage.src = "https://cdn-icons-png.flaticon.com/512/8649/8649607.png";
+    userImage.src = "https://www.dropbox.com/scl/fi/yf0bh5vemosqj3qn477t3/user-1.png?rlkey=is8um60xzn691i9r6wyg2hmcv&st=v5agivaw&raw=1";
     userImage.alt = "User Avatar";
 
     let userMessage = document.createElement("div");
