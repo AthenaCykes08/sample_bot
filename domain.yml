@@ -161,7 +161,7 @@ responses:
   - text: "Would you like to re-enter any of the details?"
 
   utter_brievity:
-  - text: "(FOR THE SAKE OF BRIEVITY, THIS IS THE END OF THE SIMULATION)\n\n (THIS MARKS THE END OF THE SIMULATION. PLEASE CLICK ON THE FOLLOWING LINK TO BE TAKEN TO THE QUESTIONNAIRE)"
+  - text: "(FOR THE SAKE OF BRIEVITY, YOU ARE NOT REQUIRED TO RE-ENTER THE DETAILS)\n\n (THIS MARKS THE END OF THE SIMULATION. PLEASE CLICK ON THE FOLLOWING LINK TO BE TAKEN TO THE QUESTIONNAIRE)"
 
   utter_breaking:
   - text: "That's alright! The purchase process has been stopped, and all information you've entered has been erased. If you would like to ask any other questions, let me know and I will do my best to answer."

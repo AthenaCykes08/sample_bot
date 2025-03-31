@@ -102,11 +102,13 @@ async function rasaInteraction(msg) {
             thinkingContainer.appendChild(thinkingMessage);
             chatBox.appendChild(thinkingContainer);
 
+            const count = (msg) => msg.trim().split(/\s+/).length;
+
             // Scroll to bottom
             chatBox.scrollTop = chatBox.scrollHeight;
 
             // Wait for 2 seconds before replacing the "thinking" message
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, Math.max(((count(msg.text) / 5) * 1000), 4000)));
 
             // Remove the "thinking" message
             chatBox.removeChild(thinkingContainer);
@@ -145,9 +147,11 @@ async function rasaInteraction(msg) {
 // Extract the button making code into its own separate function (need to pass in the lassMsg as a local var)
 function makeButtons(lastMsg) {
 
-    console.log(lastMsg)
+    // console.log(lastMsg)
 
-    console.log(responses.utter_greet === lastMsg)
+    // console.log(responses.utter_greet === lastMsg)
+
+    let className = "";
     
     // Depending on the chatbot response, we replace the currently empty buttonVals with a set of responses appropriate for the response
     let buttonVals = {};
@@ -160,7 +164,8 @@ function makeButtons(lastMsg) {
             buttonVals = {"Statistics": "Hi, how often does the Post Office lose letters and parcels during delivery?", 
                 "Insurance": "What kind of remedial action is taken by the Post Office if the letter is lost?", 
                 "Postage Request": "Could you walk me through potential postage options suitable for sending a passport?"};
-                console.log(buttonVals);
+                // console.log(buttonVals);
+            className = "";
             break;
         case responses.utter_is_suitable:
         case responses.utter_is_suitable_verbose:
@@ -168,6 +173,7 @@ function makeButtons(lastMsg) {
         case responses.utter_like_to_purchase:
         case responses.utter_repeat_form:
             buttonVals = {"Yes": "Yes", "No": "No"};
+            className = "input_button";
             break;
     }
 
@@ -181,7 +187,7 @@ function makeButtons(lastMsg) {
         let responseButton = document.createElement("button");
         responseButton.innerText = val;
         responseButton.value = buttonVals[val];
-        responseButton.className = "input_button";
+        responseButton.className = className;
         responseButton.onclick = () => autofillResponse(responseButton.value);
         buttonPlace.appendChild(responseButton);
     }
