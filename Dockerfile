@@ -24,4 +24,4 @@ ENTRYPOINT []
 
 # ENTRYPOINT [ "rasa" ]
 # Run Rasa with API enabled and CORS open (adjust CORS value if needed)
-CMD ["/bin/bash", "-c", "rasa run --enable-api --cors '*' --endpoints endpoints.yml, --port ${PORT:-5005} --debug"]
+CMD ["/bin/bash", "-c", "rasa run --enable-api --cors '*' --endpoints endpoints.yml --port ${PORT:-5005} --debug"]

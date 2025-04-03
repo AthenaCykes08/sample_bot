@@ -1,5 +1,5 @@
 // TODO: remember to change this later
-let rasaServerUrl = "http://localhost:5005/webhooks/rest/webhook";
+let rasaServerUrl = "https://bar-img-820874387134.europe-west2.run.app/webhooks/rest/webhook";
 
 // Potential chatbot responses, literally hardcoded in -> when working with real chatbot, will need to change this
 let responses = {
@@ -107,7 +107,7 @@ async function rasaInteraction(msg) {
             // Scroll to bottom
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            // Wait for 2 seconds before replacing the "thinking" message
+            // The high anthropomorphism chatbots have a variable waiting time between each message, to create the feeling of someone typing
             await new Promise(resolve => setTimeout(resolve, Math.max(((count(msg.text) / 5) * 1000), 4000)));
 
             // Remove the "thinking" message
@@ -177,7 +177,7 @@ function makeButtons(lastMsg) {
             break;
     }
 
-    console.log(buttonVals);
+    // console.log(buttonVals);
 
     // Then we make the buttons, where we give button a value corresponding with the text (https://www.w3schools.com/JSREF/prop_pushbutton_value.asp) 
     // and an onclick function that sends the message displayed in the button as a response

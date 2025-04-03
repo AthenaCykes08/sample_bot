@@ -104,10 +104,10 @@ responses:
   - text: "Hello, I'm Alex, and I work for the Post Office. How can I assist you today?"
 
   utter_post_stats:
-  - text: "The Post Office takes utmost care to ensure each parcel arrives at its destination. Of course, sometimes items get lost in transit. For privacy reasons, I can’t provide the exact amount of lost post, but last year’s statistics reveal that the percentage of lost post was very low. All of this is to say, it is very unlikely for an item you send to not arrive at your chosen destination."
+  - text: "The Post Office takes utmost care to ensure each parcel arrives at its destination. Of course, sometimes items get lost in transit. \n\nHowever, last year’s statistics reveal that the percentage of lost post was less than 1%. \n\nAll of this is to say, it is very unlikely for a parcel to not arrive to its destination."
 
   utter_insurance:
-  - text: "Great question! When purchasing postage for an item, you are given an option to insure the item in case of loss or damage. If the insured item is lost, we guarantee a full refund of the item’s monetary value and postage costs.\n\n However, if insurance wasn’t bought for an item that then went missing, you are only eligible to claim a refund for the postage costs of the item."
+  - text: "Great question! When purchasing postage for an item, you are given an option to insure the item in case of loss or damage. \n\nIf the insured item is lost, we guarantee a full refund of the item’s monetary value and postage costs.\n\n However, if insurance wasn’t bought for an item that then went missing, you are only eligible to claim a refund for the postage costs of the item."
 
   utter_anything_else:
   - text: "Can I help with anything else?"
@@ -130,14 +130,14 @@ responses:
   # Now the questions, which need to be formulated in a specific way
   # Going with a more expanded version, as I will be having two forms in this bot
   utter_ask_postage_form_tracked:
-  - text: "Since a Passport is a highly important item, I would suggest sending it using Tracked Postage. When you buy Tracked Postage, you will receive a link which you can use to track the parcel’s location. You will also get a confirmation when the item arrives at its destination. It is the most expensive postage option, costing £3.20. \n\nIs this option suitable?"
+  - text: "Since a Passport is a highly important item, I would suggest sending it using Tracked Postage. \n\nWhen you buy Tracked Postage, you will receive a link which you can use to track the parcel’s location. You will also get a confirmation when the item arrives at its destination. \n\nIt is the most expensive postage option, costing £3.20. \n\nIs this option suitable?"
 
   # Just realised that I will not be asking a question here, but instead, will need to fill in the slot through the actions server
   utter_signed:
-  - text: "That’s alright! The only other option that I would consider suitable for sending a passport is Signed Postage. When you buy Signed Postage, you will receive a confirmation text when the item arrives at its destination. It is a cheaper alternative, costing £2.80."
+  - text: "That’s alright! The only other option that I would consider suitable for sending a passport is Signed Postage. \n\nWhen you buy Signed Postage, you will receive a confirmation text when the item arrives at its destination. \n\nIt is a cheaper alternative, costing £2.80."
 
   utter_ask_postage_form_insured:
-  - text: "I would also recommend adding insurance onto your postage. Postage insurance ensures that if your package is lost, you will receive compensation equivalent to the postage costs and the item’s value. In the very unlikely case that the passport would be lost, insurance would allow to cover the costs of getting a new one. For this postage, the insurance would cost about £6.49. \n\nIs this something that sounds suitable for you?"
+  - text: "I would also recommend adding insurance onto your postage. \n\nPostage insurance ensures that if your package is lost, you will receive compensation equivalent to the postage costs and the item’s value. In the very unlikely case that the passport would be lost, insurance would allow to cover the costs of getting a new one. \n\nFor this postage, the insurance would cost about £6.49. \n\nIs this something that sounds suitable for you?"
 
   utter_purchase_interest:
   - text: "If you wish, I would be happy to help you purchase the chosen postage option. I will walk you through the purchase process step by step. You will be able to stop the process at any point by simply sending a message ‘break’. If you make a mistake at any point, wait until the summary is displayed and say ‘no’ when asked if the information is correct. \n\n Would you like to continue?"
